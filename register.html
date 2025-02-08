@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration - Darsafi Hardware</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <h2>User Registration</h2>
+
+    <form id="registrationForm">
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" required>
+        <span id="nameError" class="error"></span>
+
+        <label for="regNumber">Registration Number:</label>
+        <input type="text" id="regNumber" name="regNumber" placeholder="BCS-00-0000-0000" required>
+        <span id="regError" class="error"></span>
+
+        <label for="sex">Sex:</label>
+        <select id="sex" name="sex">
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <span id="emailError" class="error"></span>
+
+        <label for="region">Region:</label>
+        <select id="region" name="region">
+            <option value="">Select Region</option>
+			<option value="Dar es salaam">Dar es salaam</option>
+			<option value="Arusha">Arusha</option>
+			<option value="Dodoma">Dodoma</option>
+			<option value="Mwanza">Mwanza</option>
+			<option value="Mbeya">Mbeya</option>
+			
+        </select>
+
+        <label for="district">District:</label>
+        <select id="district" name="district">
+            <option value="">Select District</option>
+	
+        </select>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <span id="passwordError" class="error"></span>
+
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required>
+        <span id="confirmPasswordError" class="error"></span>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <script src="scripts.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Object storing districts for each region
+        var districtsByRegion = {
+            "Dar es Salaam": ["Ilala", "Kinondoni", "Temeke", "Ubungo", "Kigamboni"],
+            "Arusha": ["Arusha City", "Meru", "Karatu", "Longido", "Monduli"],
+            "Mwanza": ["Nyamagana", "Ilemela", "Sengerema", "Misungwi", "Kwimba"]
+			"Dodoma": ["chamwino", "Chemba", "Kongwa", "Mpwapwa", "Bahi", "Dodoma mjini"]
+			"Mbeya": ["Mbeya mjini", "Chunya", "Mbarali", "Rungwe", "Ileje", "Mbozi", "Kyela"]
+        };
+
+        // Event Listener: When user selects a region
+        $("#region").change(function () {
+            var selectedRegion = $(this).val();
+            var districtDropdown = $("#district");
+
+            // Clear previous district options
+            districtDropdown.empty();
+            districtDropdown.append('<option value="">-- Select District --</option>');
+
+            // Populate districts based on the selected region
+            if (selectedRegion && districtsByRegion[selectedRegion]) {
+                districtsByRegion[selectedRegion].forEach(function (district) {
+                    districtDropdown.append('<option value="' + district + '">' + district + '</option>');
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>
